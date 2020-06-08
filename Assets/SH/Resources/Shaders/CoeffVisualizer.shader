@@ -42,7 +42,7 @@
 			float4 c7;
 			float4 c8;
 
-			samplerCUBE input;
+			samplerCUBE envmap;
 			float _Mode;
 
 			float Y0(float3 v)
@@ -103,7 +103,7 @@
 			fixed4 frag(v2f i) : SV_Target
 			{
 				float3 v = i.texcoord.xyz;
-				float4 original = texCUBE(input, i.texcoord);
+				float4 original = texCUBE(envmap, i.texcoord);
 				float4 approx = c0 * Y0(v) + c1 * Y1(v) + c2 * Y2(v) + c3 * Y3(v) + c4 * Y4(v) + c5 * Y5(v) + c6 * Y6(v) + c7 * Y7(v) + c8 * Y8(v);
 				return lerp(original, approx, _Mode);
 			}
